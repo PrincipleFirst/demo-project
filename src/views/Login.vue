@@ -37,15 +37,15 @@
 
 <script>
   export default {
-    name: "login",
+    name: 'login',
     data() {
       return {
         isFocus: false,
         loading: false,
         ruleForm: {
           username: '',
-          pass: ''
-        }
+          pass: '',
+        },
       }
     },
     mounted() {
@@ -57,9 +57,11 @@
     },
     computed: {
       toFocus() {
-        if (this.isFocus === true)
+        if (this.isFocus === true) {
           return 'opacity: 0.55'
-      }
+        }
+        return ''
+      },
     },
     methods: {
       login() {
@@ -75,16 +77,18 @@
         console.log('clear', data)
       },
       focus_sh() {
-        if (this.isFocus === true)
+        if (this.isFocus === true) {
           return
+        }
         this.isFocus = true
       },
       focus_hi() {
-        if (this.isFocus === false)
+        if (this.isFocus === false) {
           return
+        }
         this.isFocus = false
-      }
-    }
+      },
+    },
   }
 </script>
 
