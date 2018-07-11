@@ -3,8 +3,8 @@
         <div class="login-content">
             <div class="card">
                 <div class="card-header">
-                    <div class="companyName"><h4>天恒招标</h4></div>
-                    <div class="sysName">招标业务管理系统</div>
+                    <div class="companyName"><h4>华强电力</h4></div>
+                    <div class="sysName">内部成果演示系统</div>
                 </div>
                 <div class="login_form" @click="focus_sh">
                     <el-form :model="ruleForm" status-icon
