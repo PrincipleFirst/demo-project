@@ -2,14 +2,16 @@
     <div class="headerWrapper">
         <header class="header">
             <div class="container"><h1><a href="#/zh-CN" class="nav-link"><img
-                    src="./logo.png" alt="element-logo" class="nav-logo">&nbsp;hqep</a></h1>
+                    src="../assets/image/logo.png" alt="element-logo" class="nav-logo">&nbsp;hqep</a></h1>
                 <ul class="nav">
                     <li class="nav-item nav-algolia-search">
-                        <div class="el-autocomplete">
-                            <div class="el-input el-input--small">
-                                <input autocomplete="off" placeholder="搜索文档">
-                            </div>
-                        </div>
+                        <el-autocomplete
+                                v-model="state4"
+                                :fetch-suggestions="querySearchAsync"
+                                placeholder="搜索文档"
+                                size="small"
+                                @select="handleSelect"
+                        ></el-autocomplete>
                     </li>
                     <li class="nav-item"><a href="#/zh-CN/guide">指南</a></li>
                     <li class="nav-item"><a href="#/zh-CN/component" class="active">组件</a></li>
@@ -23,10 +25,11 @@
 </template>
 
 <script type="text/ecmascript-6">
-
+  export default {
+  }
 </script>
 
-<style>
+<style lang="stylus" scoped>
     .headerWrapper {
         position: fixed;
         height: 80px;
