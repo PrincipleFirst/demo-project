@@ -5,8 +5,8 @@ function resolve(dir) {
 }
 
 module.exports = {
-  chainWebpack: config => {
+  chainWebpack: (config) => {
     config.resolve.alias
       .set('views', resolve('src/views'))
-  }
+  },
 }

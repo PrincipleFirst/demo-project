@@ -1,200 +1,211 @@
 <template>
-    <div class="bg-img">
-        <div class="login-content">
-            <div class="card">
-                <div class="card-header">
-                    <div class="companyName"><h4>华强电力</h4></div>
-                    <div class="sysName">内部成果演示系统</div>
-                </div>
-                <div class="login_form" @click="focus_sh">
-                    <el-form :model="ruleForm" status-icon
-                             ref="ruleForm">
-                        <el-form-item prop="username">
-                            <el-input placeholder="用户名"
-                                      prefix-icon="iconfont icon-yonghu"
-                                      v-model="ruleForm.username"
-                                      auto-complete="off">
-                            </el-input>
-                        </el-form-item>
-                        <el-form-item prop="pass">
-                            <el-input type="password"
-                                      placeholder="密码"
-                                      v-model="ruleForm.pass"
-                                      prefix-icon="iconfont icon-iconfontzhizuobiaozhun0253"
-                                      auto-complete="off"></el-input>
-                        </el-form-item>
-                        <el-form-item>
-                            <el-button style="width: 100%" type="primary" @click="login" :loading="loading">登录
+    <div class="user-login">
+        <div class="user-login-bg"></div>
+        <div class="content-wrapper">
+            <h2 class="slogan">
+                欢迎使用 <br/>华强内容管理系统
+            </h2>
+            <div class="form-container">
+                <h4 class="form-title">登录</h4>
+                <el-form ref="form" :model="user" label-width="0">
+                    <div class="form-items">
+                        <el-row class="form-item">
+                            <el-col>
+                                <el-form-item prop="username" :rules="[ { required: true, message: '用户名不能为空'}]">
+                                    <div class="form-line">
+                                        <i class="el-icon-edit-outline input-icon"></i>
+                                        <el-input class="login-input" placeholder="用户名"
+                                                  v-model="user.username"></el-input>
+                                    </div>
+                                </el-form-item>
+                            </el-col>
+                        </el-row>
+                        <el-row class="form-item">
+                            <el-col>
+                                <el-form-item prop="password" :rules="[ { required: true, message: '密码不能为空'}]">
+                                    <div class="form-line">
+                                        <i class="el-icon-service input-icon"></i>
+                                        <el-input class="login-input" type="password" placeholder="密码"
+                                                  v-model="user.password"></el-input>
+                                    </div>
+                                </el-form-item>
+                            </el-col>
+                        </el-row>
+                        <el-row class=form-item>
+                            <el-col>
+                                <el-form-item>
+                                    <el-checkbox class="checkbox">记住账号</el-checkbox>
+                                </el-form-item>
+                            </el-col>
+                        </el-row>
+                        <el-row class="form-item">
+                            <el-button type="primary" class="submit-btn" size="small" @click="submitBtn">
+                                登 录
                             </el-button>
-                        </el-form-item>
-                    </el-form>
-                </div>
+                        </el-row>
+                    </div>
+                    <el-row class="tips">
+                        <a href="/" class="link">
+                            立即注册
+                        </a>
+                        <span class="line">|</span>
+                        <a href="/" class="link">
+                            忘记密码
+                        </a>
+                    </el-row>
+                </el-form>
             </div>
         </div>
-        <div id="focus_ovr" :style="toFocus" @click="focus_hi"></div>
     </div>
 </template>
 
 <script>
   export default {
-    name: 'login',
+    name: 'UserLogin',
     data() {
       return {
-        isFocus: false,
-        loading: false,
-        ruleForm: {
+        user: {
           username: '',
-          pass: '',
+          password: '',
         },
       }
     },
-    mounted() {
-      document.body.addEventListener('keyup', (e) => {
-        if (e.keyCode === 13) {
-          this.login()
-        }
-      })
-    },
-    computed: {
-      toFocus() {
-        if (this.isFocus === true) {
-          return 'opacity: 0.55'
-        }
-        return ''
-      },
+    created() {
     },
     methods: {
-      login() {
-        this.loading = true
-        this.$refs.ruleForm.validateField('pass', () => {
-          this.loading = false
+      submitBtn() {
+        this.$refs.form.validate((valid) => {
+          if (valid) {
+            this.$message({
+              message: '登录成功',
+              type: 'success',
+            })
+          }
         })
-      },
-      onSelect(data) {
-        console.log(data)
-      },
-      onClear(data) {
-        console.log('clear', data)
-      },
-      focus_sh() {
-        if (this.isFocus === true) {
-          return
-        }
-        this.isFocus = true
-      },
-      focus_hi() {
-        if (this.isFocus === false) {
-          return
-        }
-        this.isFocus = false
       },
     },
   }
 </script>
 
 <style lang="stylus" scoped>
-    .bg-img
-        display flex
-        flex-flow column
-        width 100%
-        height 100vh
-        background url(../assets/image/login_bg.jpg) center no-repeat
-        background-size cover
+    >>> .el-input__inner
+        border unset
+        border-radius unset
 
-    .login-content
-        display flex
-        flex 1
-        align-items center
-        justify-content center
-
-    .card
-        position relative
-        display flex
-        z-index 11
-        flex-direction column
-        align-items center
-        width 432px
-        background-color #fff
-        border 1px solid #ebeef5
-        border-radius 4px
-        -webkit-animation-name card
-        -webkit-box-shadow 0 2px 12px 0 rgba(0, 0, 0, .85)
-        box-shadow 0 2px 12px 0 rgba(0, 0, 0, .85)
-        -moz-animation-name card
-        -o-animation-name card
-        animation-name card
-        -webkit-animation-duration 600ms
-        -moz-animation-duration 600ms
-        -o-animation-duration 600ms
-        animation-duration 600ms
-        -webkit-animation-fill-mode forwards
-        -moz-animation-fill-mode forwards
-        -o-animation-fill-mode forwards
-        animation-fill-mode forwards
-
-    @-webkit-keyframes card
-        from
-            top -40px
-        to
+    .user-login
+        .user-login-bg
+            position absolute
             top 0
+            left 0
+            right 0
+            bottom 0
+            background-image url(../assets/image/login.jpg)
+            background-size cover
 
-    @keyframes card
-        from
-            top -40px
-        to
-            top 0
+        .el-checkbox__label
+            color #999
+            font-size 13px
 
-    .card-header
-        position relative
-        overflow hidden
-        z-index 11
-        top -40px
-        width 78%
-        padding 25px
-        border-radius 3px
-        background linear-gradient(60deg, #ec407a, #d81b60)
-        box-shadow 0 4px 20px 0 rgba(0, 0, 0, 0.14), 0 7px 10px -5px rgba(233, 30, 99, 0.4)
-        display flex
-        flex-direction column
-        align-items center
-        margin 0 auto
+        .content-wrapper
+            position absolute
+            top -100px
+            left 0
+            right 0
+            bottom 0
+            max-width 1080px
+            margin 0 auto
+            display flex
+            justify-content space-around
+            align-items center
+            .slogan
+                text-align center
+                color #fff
+                font-size 36px
+                letter-spacing 2px
+                line-height 48px
 
-    .card-header h4
-        font-weight 400
-        color #fff
-        font-size 24px
-        line-height 32px
-        margin-bottom 25px
-        margin-top 5px
+        .form-container
+            display flex
+            justify-content center
+            flex-direction column
+            padding 30px 40px
+            background-color #fff
+            border-radius 6px
+            box-shadow 1px 1px 2px #eee
 
-    .sysName
-        font-weight 400
-        color #fff
-        font-size 18px
-        line-height 26px
+        .el-form-item
+            margin-bottom 15px
 
-    .login_form
-        width 90%
+        .form-Item
+            position relative
+            flex-direction column
 
-    #focus_ovr
-        position absolute
-        top 0
-        left 0
-        height 100vh
-        width 100%
-        background #000
-        z-index 10
-        opacity 0
+        .form-line
+            position relative
+            display flex
+            align-items center
+            border-bottom 1px solid #dfdfe1
+            &after
+                content ''
+                position absolute
+                bottom 3px
+                left 0
+                width 100%
+                box-sizing border-box
+                border-width 1px
+                border-style solid
+                border-top 0
+                border-left 0
+                border-right 0
+                border-color #dcdcdc
+                border-radius 0
 
-    .el-button--primary
-        background linear-gradient(60deg, #ec407a, #d81b60)
-        border-color #d81b60
+        .el-input
+            width 240px
+            input
+                border none
+                margin 0
+                padding-left 10px
+                font-size 13px
 
-    .el-button--primaryfocus, .el-button--primaryhover
-        background #ec407a
-        border-color #ec407a
+        .form-title
+            margin 0 0 20px
+            text-align center
+            color #3080fe
+            letter-spacing 12px
 
-    .el-button--primary.is-active, .el-button--primaryactive
-        background #d81b60
-        border-color #d81b60
+        .input-icon
+            color #999
+
+        .checkbox
+            margin-left 5px
+
+        .submit-btn
+            margin-bottom 25px
+            width 100%
+            background #3080fe
+            border-radius 28px
+
+        .tips
+        .link
+            color #999
+            text-decoration none
+            font-size 13px
+
+        .line
+            color #dcd6d6
+            margin 0 8px
+
+    @media screen and (max-width 720px)
+        .user-login
+            .content-wrapper
+                margin 20px auto
+                top 40px
+                max-width 300px
+                display block
+                .slogan
+                    color #666
+                    font-size 22px
+                    line-height 30px
+
 </style>
