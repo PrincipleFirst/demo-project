@@ -2,7 +2,7 @@
     <div class="page-component-up" @click="backTop" ref="up"><i class="el-icon-caret-top"></i></div>
 </template>
 
-<script type="text/ecmascript-6">
+<script>
   export default {
     methods: {
       backTop() {

@@ -1,5 +1,5 @@
 <template>
-    <v-header></v-header>
+  <v-header></v-header>
 </template>
 
 <script>
