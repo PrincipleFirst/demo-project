@@ -13,7 +13,6 @@ module.exports = {
   ],
   rules: {
     'semi': 0,
-    'indent': 0,
     'import/extensions': 0,
     'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off'

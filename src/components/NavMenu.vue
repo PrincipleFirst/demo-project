@@ -140,8 +140,6 @@
     position relative
     transition .15s ease-out
     text-decoration none
-    &:hover
-      color #409eff
-    &.active
+    &:hover,&.active
       color #409eff
 </style>
